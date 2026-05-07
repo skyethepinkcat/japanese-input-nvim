@@ -13,7 +13,6 @@ enable English Input.
 ## Dependencies
 
 By default, requires [macism](https://github.com/laishulu/macism).
-
 ## Options
 
 | Name| Description| Default |
@@ -65,3 +64,6 @@ imports = [ inputs.japanese-input-nvim.nixvimModules.default ];
 plugins.japanese-input-nvim.enable = true;
 
 ```
+
+Provided you're running on darwin, these will handle macism by using
+`pkgs.macism`.
