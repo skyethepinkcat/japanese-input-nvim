@@ -20,7 +20,7 @@ let
         description = "Package to use for japanese-input-nvim.";
       };
       settingsOptions = lib.optionalAttrs isDarwin {
-        command = lib.nixvim.defaultNullOpts.mkString defaultCommand "Command to use for input switching.";
+        command = lib.nixvim.defaultNullOpts.mkStr defaultCommand "Command to use for input switching.";
       };
       settingsExample = {
         key = "<leader>j";
