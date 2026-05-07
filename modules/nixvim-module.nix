@@ -19,7 +19,7 @@ let
         inherit (self'.packages) default;
         description = "Package to use for japanese-input-nvim.";
       };
-      settingsOptions = lib.optionalAttrs isDarwin {
+      settingsOptions = {
         command = lib.nixvim.defaultNullOpts.mkStr defaultCommand "Command to use for input switching.";
       };
       settingsExample = {
@@ -30,6 +30,11 @@ let
       };
       description = "Enable simpler Japanese input, primarily for MacOS and English speakers.";
       maintainers = [ lib.maintainers.skyethepinkcat ];
+      extraPackages =
+        with pkgs;
+        lib.optionals isDarwin [
+          macism
+        ];
     }
   );
 in

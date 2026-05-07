@@ -43,6 +43,10 @@ function M.setup(opts)
 		end,
 		desc = "If jp mode is primed, enter japanese input mode.",
 	})
+	local ok, wk = pcall(require, "which-key")
+	if ok then
+		wk.add({ opts.key, icon = "🇯🇵" })
+	end
 end
 
 return M
