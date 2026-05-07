@@ -23,6 +23,7 @@
           inputs',
           pkgs,
           system,
+          lib,
           ...
         }:
         {
@@ -40,6 +41,10 @@
           packages.default = pkgs.vimUtils.buildVimPlugin {
             name = "japanese-input-nvim";
             src = ./.;
+            meta = {
+              url = "https://github.com/skyethepinkcat/japanese-input-nvim";
+              maintainers = [ lib.maintainers.skyethepinkcat ];
+            };
           };
 
           devShells = {
