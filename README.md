@@ -44,27 +44,23 @@ shouldn't work.
 
 ### Nixvim
 
-If you use [nixvim](https://github.com/nix-community/nixvim) and flake-parts, a
+If you use [nixvim](https://github.com/nix-community/nixvim), a
 nixvim module has already been provided for you.
 
-flake.nix:
+flake.nix inputs:
 ```nix
-{
-  inputs = {
-    japanese-input-nvim = {
-      url = "github:skyethepinkcat/nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-  outputs =
-    { flake-parts, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        inputs.japanese-input-nvim.nixvimModules.default
-      ];
-    };
-}
+inputs.japanese-input-nvim = {
+  url = "github:skyethepinkcat/nvim";
+
+  # Recommended that you include your own nixpkgs, since its only used for
+  # macism, which should stay up to date.
+  inputs.nixpkgs.follows = "nixpkgs";
+};
 ```
 
-Configurations that don't use nix-parts don't fit my use case, but I'll accept
-pull requests with examples.
+
+nixvimConfiguration:
+```nix
+imports = [ inputs.japanese-input-nvim.nixvimModules.default ];
+
+```

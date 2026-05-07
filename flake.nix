@@ -11,7 +11,9 @@
     { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./flake/nixvimModule.nix
+        ./modules/nixvim-module.nix
+        # ./module.nix
+        # inputs.foo.flakeModule
       ];
 
       perSystem =
