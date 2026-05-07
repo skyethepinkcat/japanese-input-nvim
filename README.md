@@ -10,7 +10,6 @@ don't enter insert within 3 seconds, its automatically unprimed to avoid
 accidentally entering Japanese Input. Whenever you exit insert mode, the plugin
 enable English Input.
 
-
 ## Dependencies
 
 By default, requires [macism](https://github.com/laishulu/macism).
@@ -31,7 +30,7 @@ You can use this repo as a regular neovim plugin using your preferred
 package manager.
 
 <details>
-    <summary>lazy.nvim</summary>
+<summary>lazy.nvim</summary>
 
 ```lua
 {
@@ -39,22 +38,33 @@ package manager.
 },
 ```
 
-    I have not tested this with lazy loading, but I don't see any reason it
-    shouldn't work.
+I have not tested this with lazy loading, but I don't see any reason it
+shouldn't work.
 </details>
-
 
 ### Nixvim
 
-If you use [nixvim](https://github.com/nix-community/nixvim) and flake-parts, a nixvim module
-has already been provided for you.
+If you use [nixvim](https://github.com/nix-community/nixvim) and flake-parts, a
+nixvim module has already been provided for you.
 
 flake.nix:
 ```nix
 {
-    inputs = {
-        japanese-input-nvim.url = "github:skyethepinkcat/nvim"
-    }
+  inputs = {
+    japanese-input-nvim = {
+      url = "github:skyethepinkcat/nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+  outputs =
+    { flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.japanese-input-nvim.nixvimModules.default
+      ];
+    };
 }
-
 ```
+
+Configurations that don't use nix-parts don't fit my use case, but I'll accept
+pull requests with examples.

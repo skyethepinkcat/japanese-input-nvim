@@ -1,6 +1,6 @@
 { moduleWithSystem, ... }:
-{
-  flake.nixvimModules.japanese-input-nvim = moduleWithSystem (
+let
+  module = moduleWithSystem (
     { self', ... }:
     {
       lib,
@@ -10,12 +10,13 @@
     }:
     let
       isDarwin = pkgs.stdenv.hostPlatform.system == "aarch64-darwin";
+      defaultCommand = if isDarwin then lib.getExe pkgs.macism else "";
     in
     lib.nixvim.plugins.mkNeovimPlugin {
       name = "japanese-input";
       package = self'.packages.default;
-      settingsOptions = lib.optionalAttr {
-        command = lib.nixvim.defaultNullOpts.mkString "${lib.getExe pkgs.macism}" "Command to use for input switching.";
+      settingsOptions = lib.optionalAttr isDarwin {
+        command = lib.nixvim.defaultNullOpts.mkString defaultCommand "Command to use for input switching.";
       };
       settingsExample = {
         key = "<leader>j";
@@ -25,5 +26,9 @@
       };
     }
   );
+in
+{
+  flake.nixvimModules.japanese-input-nvim = module;
+  flake.nixvimModules.default = module;
 
 }
