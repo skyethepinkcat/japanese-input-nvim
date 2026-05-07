@@ -14,13 +14,17 @@ let
     in
     lib.nixvim.plugins.mkNeovimPlugin {
       name = "japanese-input";
-      package = self'.packages.default;
-      settingsOptions = lib.optionalAttr isDarwin {
+      package = lib.mkOption {
+        type = lib.types.package;
+        inherit (self'.packages) default;
+        description = "Package to use for japanese-input-nvim.";
+      };
+      settingsOptions = lib.optionalAttrs isDarwin {
         command = lib.nixvim.defaultNullOpts.mkString defaultCommand "Command to use for input switching.";
       };
       settingsExample = {
         key = "<leader>j";
-        command = lib.Expression "pkgs.macism";
+        command = lib.literalExpression "pkgs.macism";
         japanese_ime = "com.apple.inputmethod.Kotoeri.KanaTyping.Japanese";
         english_ime = "com.apple.keylayout.ABC";
       };
