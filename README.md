@@ -62,5 +62,6 @@ inputs.japanese-input-nvim = {
 nixvimConfiguration:
 ```nix
 imports = [ inputs.japanese-input-nvim.nixvimModules.default ];
+plugins.japanese-input-nvim.enable = true;
 
 ```
