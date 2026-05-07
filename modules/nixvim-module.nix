@@ -24,6 +24,8 @@ let
         japanese_ime = "com.apple.inputmethod.Kotoeri.KanaTyping.Japanese";
         english_ime = "com.apple.keylayout.ABC";
       };
+      description = "Enable simpler Japanese input, primarily for MacOS and English speakers.";
+      maintainers = [ lib.maintainers.skyethepinkcat ];
     }
   );
 in
