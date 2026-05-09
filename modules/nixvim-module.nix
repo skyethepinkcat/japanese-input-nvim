@@ -4,7 +4,6 @@ let
     { self', ... }:
     {
       lib,
-      config,
       pkgs,
       ...
     }:
