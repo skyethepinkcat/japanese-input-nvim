@@ -31,10 +31,9 @@ let
       description = "Enable simpler Japanese input, primarily for MacOS and English speakers.";
       maintainers = [ lib.maintainers.skyethepinkcat ];
       extraPackages =
-        with pkgs;
-        lib.optionals isDarwin [
+        lib.optionals isDarwin (with pkgs;[
           macism
-        ];
+        ]);
     }
   );
 in
