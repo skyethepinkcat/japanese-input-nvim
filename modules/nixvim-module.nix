@@ -8,7 +8,7 @@ let
       ...
     }:
     let
-      isDarwin = pkgs.stdenv.hostPlatform.system == "aarch64-darwin";
+      isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
       defaultCommand = if isDarwin then lib.getExe pkgs.macism else "";
     in
     lib.nixvim.plugins.mkNeovimPlugin {
